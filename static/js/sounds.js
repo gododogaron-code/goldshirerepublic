@@ -3,7 +3,7 @@ class AudioManager {
     constructor() {
         this.bgAudio = new Audio('/static/audio/background_music.mp3');
         this.bgAudio.loop = true;
-        this.bgAudio.volume = 0.5;
+        this.bgAudio.volume = 0.55;
         this.isPlaying = false;
         this.ctx = null;
     }
@@ -11,17 +11,28 @@ class AudioManager {
     init() {
         if (this.ctx) return;
         const AudioContext = window.AudioContext || window.webkitAudioContext;
-        this.ctx = new AudioContext();
+        if (AudioContext) {
+            this.ctx = new AudioContext();
+        }
     }
 
     toggleMusic() {
+        this.init();
+        if (this.ctx && this.ctx.state === 'suspended') {
+            this.ctx.resume();
+        }
+
         if (!this.isPlaying) {
-            this.bgAudio.play().then(() => {
-                this.isPlaying = true;
-                this.updateButtonUI(true);
-            }).catch(err => {
-                console.log('Audio autoplay prevented, user interaction required', err);
-            });
+            const playPromise = this.bgAudio.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    this.isPlaying = true;
+                    this.updateButtonUI(true);
+                }).catch(err => {
+                    console.warn('Audio play restricted by browser:', err);
+                    // Try re-triggering on next user click
+                });
+            }
         } else {
             this.bgAudio.pause();
             this.isPlaying = false;
@@ -37,7 +48,7 @@ class AudioManager {
             btn.classList.toggle('playing', playing);
         }
         if (label) {
-            label.textContent = playing ? 'Музыка ♫ (Играет)' : 'Включить музыку ♫';
+            label.textContent = playing ? 'Играет ♫' : 'Музыка';
         }
     }
 
@@ -68,31 +79,6 @@ class AudioManager {
         osc.stop(now + 0.04);
     }
 
-    playWhisper() {
-        this.init();
-        if (this.ctx && this.ctx.state === 'suspended') this.ctx.resume();
-        if (!this.ctx) return;
-
-        const now = this.ctx.currentTime;
-        [523.25, 659.25, 783.99].forEach((freq, idx) => {
-            const osc = this.ctx.createOscillator();
-            const gain = this.ctx.createGain();
-
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(freq, now + idx * 0.08);
-
-            gain.gain.setValueAtTime(0, now);
-            gain.gain.setValueAtTime(0.08, now + idx * 0.08);
-            gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.08 + 0.35);
-
-            osc.connect(gain);
-            gain.connect(this.ctx.destination);
-
-            osc.start(now + idx * 0.08);
-            osc.stop(now + idx * 0.08 + 0.4);
-        });
-    }
-
     playVoteFanfare(faction) {
         this.init();
         if (this.ctx && this.ctx.state === 'suspended') this.ctx.resume();
@@ -114,7 +100,7 @@ class AudioManager {
             osc.frequency.setValueAtTime(freq, now + i * 0.09);
 
             gain.gain.setValueAtTime(0, now);
-            gain.gain.setValueAtTime(0.1, now + i * 0.09);
+            gain.gain.setValueAtTime(0.12, now + i * 0.09);
             gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.09 + 0.45);
 
             osc.connect(gain);
@@ -127,3 +113,18 @@ class AudioManager {
 }
 
 window.tavernAudio = new AudioManager();
+
+window.toggleMusicPlayback = function(e) {
+    if (e) e.preventDefault();
+    return window.tavernAudio.toggleMusic();
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+    const btn = document.getElementById('audio-toggle-btn');
+    if (btn) {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.tavernAudio.toggleMusic();
+        });
+    }
+});

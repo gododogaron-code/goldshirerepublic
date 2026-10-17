@@ -36,18 +36,18 @@
                         <path d="M14.5 17.5L3 6V3h3l11.5 11.5M13 19l2 2 4-4-2-2M19 5l-2-2-4 4 2 2" stroke="#d946ef"/>
                         <path d="M9.5 17.5L21 6V3h-3L6.5 14.5M11 19l-2 2-4-4 2-2M5 5l2-2 4 4-2 2" stroke="#3b82f6"/>
                     </svg>
-                    <span>Фракции</span>
-                </a>
-                <a href="#chat-section" class="nav-link">
-                    <svg class="nav-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" stroke="#a855f7"/>
-                    </svg>
-                    <span>Общий чат</span>
+                    <span>Голосование</span>
                 </a>
             </nav>
 
             <div class="nav-controls">
-                <!-- Audio Ambience Toggle (Uploaded Music) -->
+                <!-- User Choice Status Badge -->
+                <div id="nav-user-vote-badge" class="nav-vote-pill" style="display: none;" onclick="scrollToFactions()">
+                    <span class="vote-dot"></span>
+                    <span id="nav-user-vote-text">Вы проголосовали</span>
+                </div>
+
+                <!-- Audio Ambience Toggle -->
                 <button id="audio-toggle-btn" class="nav-audio-btn" title="Включить / выключить фоновую музыку">
                     <svg class="audio-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M9 18V5l12-2v13" stroke="currentColor"/>
@@ -59,33 +59,6 @@
                         <i></i><i></i><i></i>
                     </span>
                 </button>
-
-                <!-- User Session -->
-                <div id="nav-guest-actions" class="nav-auth-group" style="display: none;">
-                    <button class="site-btn site-btn-subtle" onclick="showAuthModal('login')">Войти</button>
-                    <button class="site-btn site-btn-gold" onclick="showAuthModal('register')">Присоединиться</button>
-                </div>
-
-                <div id="nav-user-actions" class="nav-user-group" style="display: none;">
-                    <button id="nav-admin-btn" class="nav-minimal-btn" onclick="openAdminModal()" style="display: none;" title="Панель сервера">
-                        <svg class="nav-btn-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                            <circle cx="12" cy="12" r="3"></circle>
-                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-                        </svg>
-                        <span>Сервер</span>
-                    </button>
-                    <div class="nav-user-pill" onclick="openProfileModal()" title="Открыть профиль и настройки">
-                        <img id="nav-user-avatar" src="/static/images/avatars/human_male.svg" alt="Avatar" class="nav-avatar">
-                        <span id="nav-user-name" class="nav-charname">Герой</span>
-                    </div>
-                    <button class="nav-icon-action" onclick="handleLogout()" title="Выйти из аккаунта">
-                        <svg class="nav-btn-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-                            <polyline points="16 17 21 12 16 7"></polyline>
-                            <line x1="21" y1="12" x2="9" y2="12"></line>
-                        </svg>
-                    </button>
-                </div>
             </div>
         </div>
     </header>
@@ -141,18 +114,9 @@
                 </div>
             </div>
 
-            <!-- Server Launched State -->
-            <div id="server-launched-banner" class="server-open-banner" style="display: none;">
-                <h2>⚔️ СЕРВЕР ОТКРЫТ! ⚔️</h2>
-                <p>Ворота WoW Forever распахнуты! Вступайте в игру!</p>
-            </div>
-
             <div class="hero-actions">
                 <a href="#factions-section" class="site-btn site-btn-large site-btn-gold">
-                    Выбрать сторону
-                </a>
-                <a href="#chat-section" class="site-btn site-btn-large site-btn-outline">
-                    Открыть чат
+                    ⚔️ Принять участие в голосовании
                 </a>
             </div>
 
@@ -167,16 +131,16 @@
     <section id="factions-section" class="factions-section">
         <div class="section-container">
             <div class="section-title-wrap">
-                <h2 class="section-title">ПРОТИВОСТОЯНИЕ ФРАКЦИЙ</h2>
+                <h2 class="section-title">ГОЛОСОВАНИЕ ЗА СТОРОНУ</h2>
                 <p class="section-subtitle">Кто будет сражаться за Орду, кто за Альянс, а кто вообще не будет играть?</p>
             </div>
 
             <!-- Faction Balance Bar -->
             <div class="faction-balance-wrap">
                 <div class="balance-labels">
-                    <span class="label-alliance">🦁 Альянс: <b id="count-alliance">0</b></span>
-                    <span class="label-world">⚪ Не играют: <b id="count-world">0</b></span>
-                    <span class="label-horde">⚔️ Орда: <b id="count-horde">0</b></span>
+                    <span class="label-alliance">🦁 Альянс: <b id="count-alliance">0</b> (<span id="pct-alliance">0%</span>)</span>
+                    <span class="label-world">⚪ Не играют: <b id="count-world">0</b> (<span id="pct-world">0%</span>)</span>
+                    <span class="label-horde">⚔️ Орда: <b id="count-horde">0</b> (<span id="pct-horde">0%</span>)</span>
                 </div>
                 <div class="balance-bar-container">
                     <div id="balance-bar-alliance" class="bar-alliance" style="width: 33.3%;"></div>
@@ -189,7 +153,7 @@
             <div class="factions-grid">
                 
                 <!-- Alliance Card -->
-                <div class="faction-card faction-alliance">
+                <div id="card-alliance" class="faction-card faction-alliance">
                     <div class="faction-card-header">
                         <div class="crest-wrap">
                             <img src="/static/images/factions/alliance.png?v=2" alt="Альянс" class="faction-crest faction-crest-alliance">
@@ -199,13 +163,13 @@
                     </div>
 
                     <div class="faction-vote-action">
-                        <button id="vote-btn-alliance" class="site-btn site-btn-alliance" onclick="castVote('alliance')">
+                        <button id="vote-btn-alliance" class="site-btn site-btn-alliance" onclick="openVoteModal('alliance')">
                             Тусить в Златоземье
                         </button>
                     </div>
 
                     <div class="faction-roster-box">
-                        <div class="roster-header">Бойцы Альянса:</div>
+                        <div class="roster-header">Бойцы Альянса (<span id="roster-count-alliance">0</span>):</div>
                         <div id="roster-list-alliance" class="roster-list">
                             <div class="loading-spin">Загрузка...</div>
                         </div>
@@ -213,7 +177,7 @@
                 </div>
 
                 <!-- Not Playing Card (Neutral Slate Gray) -->
-                <div class="faction-card faction-world">
+                <div id="card-the_world" class="faction-card faction-world">
                     <div class="faction-card-header">
                         <div class="crest-wrap">
                             <img src="/static/images/factions/no_play.svg" alt="Не играю" class="faction-crest faction-crest-noplay">
@@ -223,13 +187,13 @@
                     </div>
 
                     <div class="faction-vote-action">
-                        <button id="vote-btn-the_world" class="site-btn site-btn-world" onclick="castVote('the_world')">
+                        <button id="vote-btn-the_world" class="site-btn site-btn-world" onclick="openVoteModal('the_world')">
                             Не буду играть
                         </button>
                     </div>
 
                     <div class="faction-roster-box">
-                        <div class="roster-header">Не планируют играть:</div>
+                        <div class="roster-header">Не планируют играть (<span id="roster-count-the_world">0</span>):</div>
                         <div id="roster-list-the_world" class="roster-list">
                             <div class="loading-spin">Загрузка...</div>
                         </div>
@@ -237,7 +201,7 @@
                 </div>
 
                 <!-- Horde Card -->
-                <div class="faction-card faction-horde">
+                <div id="card-horde" class="faction-card faction-horde">
                     <div class="faction-card-header">
                         <div class="crest-wrap">
                             <img src="/static/images/factions/horde.png?v=2" alt="Орда" class="faction-crest faction-crest-horde">
@@ -247,13 +211,13 @@
                     </div>
 
                     <div class="faction-vote-action">
-                        <button id="vote-btn-horde" class="site-btn site-btn-horde" onclick="castVote('horde')">
+                        <button id="vote-btn-horde" class="site-btn site-btn-horde" onclick="openVoteModal('horde')">
                             Контролировать Златоземье
                         </button>
                     </div>
 
                     <div class="faction-roster-box">
-                        <div class="roster-header">Воины Орды:</div>
+                        <div class="roster-header">Воины Орды (<span id="roster-count-horde">0</span>):</div>
                         <div id="roster-list-horde" class="roster-list">
                             <div class="loading-spin">Загрузка...</div>
                         </div>
@@ -264,278 +228,68 @@
         </div>
     </section>
 
-    <!-- General Chat & Notice Board Section -->
-    <section id="chat-section" class="social-section">
-        <div class="section-container">
-            <div class="social-grid">
+    <!-- Vote Modal (Prompt for Name & Class) -->
+    <div id="modal-vote" class="modal-overlay" style="display: none;">
+        <div class="modal-window modal-vote-window">
+            <button class="modal-close" onclick="closeVoteModal()">✕</button>
 
-                <!-- Left Column: General Chat -->
-                <div class="chat-column">
-                    <div class="panel-box chat-panel">
-                        <div class="panel-header">
-                            <div class="panel-title-wrap">
-                                <span class="panel-icon">💬</span>
-                                <div>
-                                    <h3 class="panel-title">БЕСЕДКА ЗЛАТОЗЕМЬЯ</h3>
-                                    <span class="panel-subtitle">Живой чат сообщества</span>
-                                </div>
-                            </div>
-                            <span class="chat-live-indicator"><span class="dot"></span> Онлайн</span>
-                        </div>
+            <div class="vote-modal-crest-wrap">
+                <img id="vote-modal-crest" src="/static/images/factions/alliance.png" alt="Crest" class="vote-modal-crest">
+            </div>
 
-                        <!-- Chat Messages Container -->
-                        <div id="chat-messages-box" class="chat-messages-area">
-                            <div class="loading-spin">Загрузка сообщений...</div>
-                        </div>
+            <h3 id="vote-modal-title" class="modal-title">ГОЛОСОВАНИЕ</h3>
+            <p id="vote-modal-desc" class="modal-desc">Выберите сторону и укажите ваше имя или ник</p>
 
-                        <!-- Scroll to bottom pill button -->
-                        <button id="chat-scroll-bottom-btn" class="chat-scroll-pill" style="display: none;">
-                            ⬇ Новые сообщения
-                        </button>
+            <form id="vote-form" onsubmit="handleVoteSubmit(event)">
+                <input type="hidden" id="vote-faction-input" value="alliance">
 
-                        <!-- Emoji Picker Popover -->
-                        <div id="chat-emoji-picker" class="emoji-picker hidden"></div>
+                <div class="form-group" style="margin-bottom: 1.2rem;">
+                    <label for="vote-name-input">Ваше имя или игровой ник <span class="required-star">*</span></label>
+                    <input type="text" id="vote-name-input" class="site-input" placeholder="Например: Артас или Ваня" required minlength="2" maxlength="30" autocomplete="off" autofocus>
+                </div>
 
-                        <!-- Chat Input Bar -->
-                        <div class="chat-input-bar">
-                            <button id="chat-emoji-btn" class="site-btn-icon emoji-toggle-btn" title="Выбрать эмодзи">
-                                😊
-                            </button>
-                            <input type="text" id="chat-input-text" class="site-input chat-input" placeholder="Напишите сообщение... (Enter)" maxlength="1000">
-                            <button id="chat-send-btn" class="site-btn site-btn-gold chat-send-btn">
-                                Отправить
-                            </button>
-                        </div>
+                <div class="form-group" style="margin-bottom: 1.5rem;">
+                    <label>Класс персонажа (WoW 1.0):</label>
+                    <div class="class-picker-grid">
+                        <label class="class-chip"><input type="radio" name="vote-class" value="warrior" checked><span class="class-color-warrior">⚔️ Воин</span></label>
+                        <label class="class-chip"><input type="radio" name="vote-class" value="paladin"><span class="class-color-paladin">✨ Паладин</span></label>
+                        <label class="class-chip"><input type="radio" name="vote-class" value="hunter"><span class="class-color-hunter">🏹 Охотник</span></label>
+                        <label class="class-chip"><input type="radio" name="vote-class" value="rogue"><span class="class-color-rogue">🗡️ Разбойник</span></label>
+                        <label class="class-chip"><input type="radio" name="vote-class" value="priest"><span class="class-color-priest">🕊️ Жрец</span></label>
+                        <label class="class-chip"><input type="radio" name="vote-class" value="shaman"><span class="class-color-shaman">⚡ Шаман</span></label>
+                        <label class="class-chip"><input type="radio" name="vote-class" value="mage"><span class="class-color-mage">🔮 Маг</span></label>
+                        <label class="class-chip"><input type="radio" name="vote-class" value="warlock"><span class="class-color-warlock">🔥 Чернокнижник</span></label>
+                        <label class="class-chip"><input type="radio" name="vote-class" value="druid"><span class="class-color-druid">🐾 Друид</span></label>
                     </div>
                 </div>
 
-            </div>
+                <div class="modal-actions">
+                    <button type="button" class="site-btn site-btn-subtle" onclick="closeVoteModal()">Отмена</button>
+                    <button type="submit" id="vote-submit-btn" class="site-btn site-btn-gold">Подтвердить голос</button>
+                </div>
+            </form>
         </div>
-    </section>
+    </div>
+
+    <!-- Audio Element -->
+    <audio id="tavern-audio" loop preload="none">
+        <source src="/static/audio/background_music.mp3" type="audio/mp3">
+    </audio>
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="section-container footer-content">
-            <div class="footer-crest">
-                <img src="/static/images/factions/the_world.svg" alt="The World" class="footer-icon">
-                <span class="footer-brand">ЗЛАТОЗЕМЬЕ • the goldshire republick • WoW Forever 1.0</span>
-            </div>
-            <p class="footer-quote">
-                «Златоземье — наш родной дом. 4 ноября в 15:00 МСК мы встретимся на старте WoW Forever!»
-            </p>
-            <div class="footer-copy">
-                the goldshire republick • 2026
+        <div class="footer-container">
+            <div class="footer-brand-wrap">
+                <span class="footer-brand">WoW Forever 1.0 — the goldshire republick</span>
+                <p class="footer-quote">«Златоземье — наш общий дом. Встретимся 4 ноября в 15:00 МСК!»</p>
+                <p class="footer-copy">Для друзей и сообщества the goldshire republick</p>
             </div>
         </div>
     </footer>
 
-    <!-- Whisper Dock (Private Messages) -->
-    <div id="whisper-dock" class="whisper-dock hidden">
-        <div class="whisper-dock-header">
-            <div id="whisper-tabs-list" class="whisper-tabs">
-            </div>
-            <button class="whisper-close-btn" onclick="tavernChat.closeWhisperDock()">✕</button>
-        </div>
-        <div id="whisper-messages-box" class="whisper-body">
-        </div>
-        <div class="whisper-input-row">
-            <input type="text" id="whisper-input-text" class="site-input whisper-input" placeholder="Шепнуть... (Enter)" onkeydown="if(event.key==='Enter') tavernChat.sendWhisper()">
-            <button class="site-btn site-btn-small site-btn-gold" onclick="tavernChat.sendWhisper()">➤</button>
-        </div>
-    </div>
-
-    <!-- MODAL: Auth (Login & Register) -->
-    <div id="modal-auth" class="modal-overlay hidden">
-        <div class="modal-window">
-            <button class="modal-close" onclick="closeModal('modal-auth')">✕</button>
-            
-            <div class="auth-tabs">
-                <button id="auth-tab-login" class="auth-tab active" onclick="showAuthModal('login')">Вход</button>
-                <button id="auth-tab-reg" class="auth-tab" onclick="showAuthModal('register')">Регистрация</button>
-            </div>
-
-            <!-- Login Form -->
-            <div id="modal-login-section">
-                <form onsubmit="handleLoginSubmit(event)" class="site-form">
-                    <div class="form-group">
-                        <label>Имя учетной записи (Логин):</label>
-                        <input type="text" id="login-username" class="site-input" required autocomplete="username" placeholder="Введите ваш логин">
-                    </div>
-                    <div class="form-group">
-                        <label>Пароль:</label>
-                        <input type="password" id="login-password" class="site-input" required autocomplete="current-password" placeholder="Ваш пароль">
-                    </div>
-                    <button type="submit" class="site-btn site-btn-gold site-btn-block">Войти</button>
-                </form>
-            </div>
-
-            <!-- Register Form -->
-            <div id="modal-register-section" style="display: none;">
-                <form onsubmit="handleRegisterSubmit(event)" class="site-form">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Логин:</label>
-                            <input type="text" id="reg-username" class="site-input" required autocomplete="username" placeholder="Логин">
-                        </div>
-                        <div class="form-group">
-                            <label>Пароль:</label>
-                            <input type="password" id="reg-password" class="site-input" required autocomplete="new-password" placeholder="Пароль">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Имя персонажа (Никнейм в игре):</label>
-                        <input type="text" id="reg-charname" class="site-input" required placeholder="Имя вашего героя">
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Сторона / Выбор:</label>
-                            <select id="reg-faction" class="site-input">
-                                <option value="alliance">🦁 Альянс (Тусить в Златоземье)</option>
-                                <option value="horde">⚔️ Орда (Контролировать Златоземье)</option>
-                                <option value="the_world" selected>⚪ Не буду играть (Златоземье)</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Класс (Vanilla 1.0):</label>
-                            <select id="reg-class" class="site-input">
-                                <option value="warrior">Воин</option>
-                                <option value="paladin">Паладин (Альянс)</option>
-                                <option value="hunter">Охотник</option>
-                                <option value="rogue">Разбойник</option>
-                                <option value="priest">Жрец</option>
-                                <option value="shaman">Шаман (Орда)</option>
-                                <option value="mage">Маг</option>
-                                <option value="warlock">Чернокнижник</option>
-                                <option value="druid">Друид</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="reg-tip-box">
-                        <span>💡 Расу и персональный аватар можно настроить в любой момент в профиле героя.</span>
-                    </div>
-
-                    <button type="submit" class="site-btn site-btn-gold site-btn-block">Создать персонажа</button>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL: Profile -->
-    <div id="modal-profile" class="modal-overlay hidden">
-        <div class="modal-window">
-            <button class="modal-close" onclick="closeModal('modal-profile')">✕</button>
-            <h3 class="modal-title">Профиль героя</h3>
-
-            <form onsubmit="handleProfileSave(event)" class="site-form">
-                <div class="form-group">
-                    <label>Имя персонажа:</label>
-                    <input type="text" id="prof-charname" class="site-input" required>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Сторона:</label>
-                        <select id="prof-faction" class="site-input">
-                            <option value="alliance">🦁 Альянс (Тусить в Златоземье)</option>
-                            <option value="horde">⚔️ Орда (Контролировать Златоземье)</option>
-                            <option value="the_world">⚪ Не буду играть (Златоземье)</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Класс (Vanilla 1.0):</label>
-                        <select id="prof-class" class="site-input">
-                            <option value="warrior">Воин</option>
-                            <option value="paladin">Паладин (Альянс)</option>
-                            <option value="hunter">Охотник</option>
-                            <option value="rogue">Разбойник</option>
-                            <option value="priest">Жрец</option>
-                            <option value="shaman">Шаман (Орда)</option>
-                            <option value="mage">Маг</option>
-                            <option value="warlock">Чернокнижник</option>
-                            <option value="druid">Друид</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label>Раса (Vanilla 1.0):</label>
-                    <select id="prof-race" class="site-input">
-                        <option value="Человек">Человек</option>
-                        <option value="Дворф">Дворф</option>
-                        <option value="Ночной эльф">Ночной эльф</option>
-                        <option value="Гном">Гном</option>
-                        <option value="Орк">Орк</option>
-                        <option value="Нежить">Нежить</option>
-                        <option value="Таурен">Таурен</option>
-                        <option value="Тролль">Тролль</option>
-                    </select>
-                </div>
-
-                <!-- Custom Avatar in Profile -->
-                <div class="form-group">
-                    <label>Аватар героя:</label>
-                    <div class="avatar-custom-wrapper">
-                        <img id="prof-avatar-preview" src="/static/images/avatars/human_male.svg" alt="Preview" class="avatar-large-preview">
-                        <div class="avatar-upload-inputs">
-                            <label class="site-btn site-btn-subtle site-btn-small avatar-upload-btn">
-                                📁 Загрузить картинку
-                                <input type="file" id="prof-avatar-file" accept="image/*" class="hidden">
-                            </label>
-                            <input type="text" id="prof-avatar-url" class="site-input site-input-small" placeholder="или вставьте ссылку (https://...)">
-                        </div>
-                    </div>
-                    <div id="prof-avatar-status" class="avatar-status-hint"></div>
-                    <div class="avatar-preset-label">Или выберите классический облик:</div>
-                    <div id="prof-avatar-picker" class="avatar-picker-grid"></div>
-                    <input type="hidden" id="prof-avatar-val" value="human_male">
-                </div>
-
-                <div class="form-group">
-                    <label>Сменить пароль (оставьте пустым, если не меняется):</label>
-                    <input type="password" id="prof-new-password" class="site-input" placeholder="Новый пароль">
-                </div>
-
-                <button type="submit" class="site-btn site-btn-gold site-btn-block">Сохранить</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- MODAL: Admin Settings -->
-    <div id="modal-admin" class="modal-overlay hidden">
-        <div class="modal-window">
-            <button class="modal-close" onclick="closeModal('modal-admin')">✕</button>
-            <h3 class="modal-title">⚙️ Управление сервером и таймером</h3>
-            <p class="modal-desc">Настройка параметров запуска и даты открытия.</p>
-
-            <form onsubmit="handleAdminSave(event)" class="site-form">
-                <div class="form-group">
-                    <label>Название сервера:</label>
-                    <input type="text" id="admin-server-title" class="site-input" required>
-                </div>
-                <div class="form-group">
-                    <label>Подзаголовок / Гильдия:</label>
-                    <input type="text" id="admin-server-subtitle" class="site-input">
-                </div>
-                <div class="form-group">
-                    <label>Информация о сервере (версия, рейты, дата):</label>
-                    <input type="text" id="admin-server-info" class="site-input">
-                </div>
-                <div class="form-group">
-                    <label>Дата и время открытия (Таймер отсчёта):</label>
-                    <input type="datetime-local" id="admin-countdown-date" class="site-input" required>
-                </div>
-                <button type="submit" class="site-btn site-btn-gold site-btn-block">Применить изменения</button>
-            </form>
-        </div>
-    </div>
-
     <!-- Scripts -->
-    <script src="/static/js/sounds.js"></script>
     <script src="/static/js/countdown.js"></script>
-    <script src="/static/js/chat.js"></script>
+    <script src="/static/js/sounds.js"></script>
     <script src="/static/js/app.js"></script>
 </body>
 </html>

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+        <rect width="64" height="64" rx="8" fill="#1c1c0c" stroke="#fff569" stroke-width="2"/>
+        <g fill="#fff569">
+            <!-- Dagger 1 -->
+            <path d="M22 14 L28 20 L24 38 L20 40 L20 34 Z"/>
+            <rect x="18" y="38" width="8" height="3" rx="1"/>
+            <rect x="21" y="41" width="2" height="9" fill="#eab308"/>
+            <circle cx="22" cy="51" r="2" fill="#fff569"/>
+            <!-- Dagger 2 -->
+            <path d="M42 14 L36 20 L40 38 L44 40 L44 34 Z"/>
+            <rect x="38" y="38" width="8" height="3" rx="1"/>
+            <rect x="41" y="41" width="2" height="9" fill="#eab308"/>
+            <circle cx="42" cy="51" r="2" fill="#fff569"/>
+            <!-- Poison Drop -->
+            <path d="M32 26 C30 30 30 34 32 36 C34 34 34 30 32 26 Z" fill="#84cc16"/>
+        </g>
+    </svg>

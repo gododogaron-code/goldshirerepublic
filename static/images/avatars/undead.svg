@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+    <defs>
+        <radialGradient id="grad_undead" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#9f1239" stop-opacity="0.3"/>
+            <stop offset="100%" stop-color="#4c0519" stop-opacity="0.8"/>
+        </radialGradient>
+    </defs>
+    <rect width="64" height="64" rx="32" fill="url(#grad_undead)" stroke="#9f1239" stroke-width="2.5"/>
+    <g>
+        
+        <circle cx="32" cy="26" r="10" fill="#a1a1aa"/>
+        <!-- Sunken Eyes & Glowing yellow pinpoints -->
+        <circle cx="27" cy="24" r="3" fill="#18181b"/>
+        <circle cx="37" cy="24" r="3" fill="#18181b"/>
+        <circle cx="27" cy="24" r="1" fill="#facc15"/>
+        <circle cx="37" cy="24" r="1" fill="#facc15"/>
+        <!-- Stitched mouth / jaw metal straps -->
+        <path d="M26 34 L38 34" stroke="#52525b" stroke-width="2"/>
+        <line x1="28" y1="32" x2="28" y2="36" stroke="#71717a" stroke-width="1.5"/>
+        <line x1="32" y1="32" x2="32" y2="36" stroke="#71717a" stroke-width="1.5"/>
+        <line x1="36" y1="32" x2="36" y2="36" stroke="#71717a" stroke-width="1.5"/>
+        <!-- Ragged Cloak -->
+        <path d="M18 54 C18 42 24 38 32 38 C40 38 46 42 46 54 Z" fill="#27272a" stroke="#881337" stroke-width="1.5"/>
+    
+    </g>
+</svg>

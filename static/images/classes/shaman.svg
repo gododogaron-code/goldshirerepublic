@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+        <rect width="64" height="64" rx="8" fill="#08182b" stroke="#0070de" stroke-width="2"/>
+        <g>
+            <!-- Elemental Totem -->
+            <rect x="26" y="24" width="12" height="28" rx="2" fill="#78350f" stroke="#0070de" stroke-width="1.5"/>
+            <!-- Totem Wings -->
+            <rect x="16" y="28" width="32" height="6" rx="2" fill="#92400e"/>
+            <!-- Lightning bolts -->
+            <polygon points="32,10 27,22 33,22 29,32 37,20 31,20" fill="#38bdf8" stroke="#0070de" stroke-width="1"/>
+            <!-- Eyes on totem -->
+            <circle cx="29" cy="38" r="1.5" fill="#facc15"/>
+            <circle cx="35" cy="38" r="1.5" fill="#facc15"/>
+        </g>
+    </svg>

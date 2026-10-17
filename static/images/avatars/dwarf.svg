@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+    <defs>
+        <radialGradient id="grad_dwarf" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#d97706" stop-opacity="0.3"/>
+            <stop offset="100%" stop-color="#b45309" stop-opacity="0.8"/>
+        </radialGradient>
+    </defs>
+    <rect width="64" height="64" rx="32" fill="url(#grad_dwarf)" stroke="#d97706" stroke-width="2.5"/>
+    <g>
+        
+        <circle cx="32" cy="26" r="11" fill="#fed7aa"/>
+        <!-- Big Beard -->
+        <path d="M21 28 C21 44 26 50 32 52 C38 50 43 44 43 28 Z" fill="#c2410c"/>
+        <path d="M26 36 L32 46 L38 36" stroke="#ea580c" stroke-width="2" fill="none"/>
+        <!-- Iron Helmet -->
+        <path d="M20 24 C20 14 44 14 44 24 L46 26 L18 26 Z" fill="#475569" stroke="#94a3b8" stroke-width="1.5"/>
+        <circle cx="28" cy="24" r="1.5" fill="#0f172a"/>
+        <circle cx="36" cy="24" r="1.5" fill="#0f172a"/>
+    
+    </g>
+</svg>

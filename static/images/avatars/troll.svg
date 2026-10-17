@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+    <defs>
+        <radialGradient id="grad_troll" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#10b981" stop-opacity="0.3"/>
+            <stop offset="100%" stop-color="#065f46" stop-opacity="0.8"/>
+        </radialGradient>
+    </defs>
+    <rect width="64" height="64" rx="32" fill="url(#grad_troll)" stroke="#10b981" stroke-width="2.5"/>
+    <g>
+        
+        <circle cx="32" cy="26" r="10" fill="#2dd4bf"/>
+        <!-- Long Upward Tusks -->
+        <path d="M24 34 C20 30 18 20 20 16 C22 22 24 28 26 32 Z" fill="#fef9c3"/>
+        <path d="M40 34 C44 30 46 20 44 16 C42 22 40 28 38 32 Z" fill="#fef9c3"/>
+        <!-- Long Ears -->
+        <polygon points="23,26 12,20 24,22" fill="#2dd4bf"/>
+        <polygon points="41,26 52,20 40,22" fill="#2dd4bf"/>
+        <!-- Mohawk -->
+        <path d="M29 18 C28 8 36 8 35 18 Z" fill="#ef4444"/>
+        <!-- Yellow glowing eyes -->
+        <circle cx="28" cy="24" r="1.5" fill="#eab308"/>
+        <circle cx="36" cy="24" r="1.5" fill="#eab308"/>
+        <path d="M18 54 C18 42 24 38 32 38 C40 38 46 42 46 54 Z" fill="#0f766e" stroke="#2dd4bf" stroke-width="1.5"/>
+    
+    </g>
+</svg>

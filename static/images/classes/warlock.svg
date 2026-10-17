@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+        <rect width="64" height="64" rx="8" fill="#180e28" stroke="#8787ed" stroke-width="2"/>
+        <g>
+            <!-- Demonic Horns & Fel Fire -->
+            <path d="M22 28 C20 18 26 14 32 14 C38 14 44 18 42 28 C46 36 40 46 32 46 C24 46 18 36 22 28 Z" fill="#2e1065" stroke="#8787ed" stroke-width="2"/>
+            <!-- Horns -->
+            <path d="M24 20 C18 12 12 16 10 24 C14 23 18 22 22 22 Z" fill="#8787ed"/>
+            <path d="M40 20 C46 12 52 16 54 24 C50 23 46 22 42 22 Z" fill="#8787ed"/>
+            <!-- Fel green eyes & soul fire -->
+            <circle cx="28" cy="28" r="2.5" fill="#22c55e"/>
+            <circle cx="36" cy="28" r="2.5" fill="#22c55e"/>
+            <path d="M30 46 C32 54 28 58 32 60 C36 58 32 54 34 46 Z" fill="#a855f7"/>
+        </g>
+    </svg>

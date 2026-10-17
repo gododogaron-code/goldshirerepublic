@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+    <defs>
+        <radialGradient id="grad_bloodelf" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.3"/>
+            <stop offset="100%" stop-color="#991b1b" stop-opacity="0.8"/>
+        </radialGradient>
+    </defs>
+    <rect width="64" height="64" rx="32" fill="url(#grad_bloodelf)" stroke="#f59e0b" stroke-width="2.5"/>
+    <g>
+        
+        <circle cx="32" cy="25" r="9" fill="#fde68a"/>
+        <!-- Long Pointy Ears -->
+        <polygon points="23,24 10,16 24,20" fill="#fde68a"/>
+        <polygon points="41,24 54,16 40,20" fill="#fde68a"/>
+        <!-- Golden / Blonde Hair -->
+        <path d="M21 21 C21 11 43 11 43 21 C45 32 43 42 41 46 C37 32 38 19 32 19 C26 19 27 32 23 46 C21 42 19 32 21 21 Z" fill="#eab308"/>
+        <!-- Glowing Emerald Green Eyes -->
+        <ellipse cx="28" cy="25" rx="2" ry="1.2" fill="#22c55e"/>
+        <ellipse cx="36" cy="25" rx="2" ry="1.2" fill="#22c55e"/>
+        <circle cx="28" cy="25" r="0.8" fill="#ecfdf5"/>
+        <circle cx="36" cy="25" r="0.8" fill="#ecfdf5"/>
+        <!-- Regal Crimson Robe -->
+        <path d="M18 54 C18 40 24 36 32 36 C40 36 46 40 46 54 Z" fill="#991b1b" stroke="#f59e0b" stroke-width="1.5"/>
+    
+    </g>
+</svg>

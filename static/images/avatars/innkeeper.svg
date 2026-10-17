@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+    <defs>
+        <radialGradient id="grad_innkeeper" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.3"/>
+            <stop offset="100%" stop-color="#78350f" stop-opacity="0.8"/>
+        </radialGradient>
+    </defs>
+    <rect width="64" height="64" rx="32" fill="url(#grad_innkeeper)" stroke="#f59e0b" stroke-width="2.5"/>
+    <g>
+        
+        <circle cx="32" cy="25" r="11" fill="#fed7aa"/>
+        <!-- Friendly Brown Beard & Mustache -->
+        <path d="M23 28 C23 42 28 48 32 48 C36 48 41 42 41 28 Z" fill="#78350f"/>
+        <path d="M26 31 C28 34 36 34 38 31" stroke="#451a03" stroke-width="2" fill="none"/>
+        <!-- Balding brown hair -->
+        <path d="M20 24 C19 18 23 14 32 14 C41 14 45 18 44 24 Z" fill="#451a03"/>
+        <circle cx="32" cy="20" r="8" fill="#fed7aa"/>
+        <!-- Kind eyes and smile -->
+        <circle cx="28" cy="24" r="1.5" fill="#3b2413"/>
+        <circle cx="36" cy="24" r="1.5" fill="#3b2413"/>
+        <!-- Tavern Apron & Mug -->
+        <path d="M16 54 C16 40 22 36 32 36 C42 36 48 40 48 54 Z" fill="#f8fafc" stroke="#b45309" stroke-width="2"/>
+        <rect x="26" y="38" width="12" height="16" fill="#b45309" rx="1"/>
+    
+    </g>
+</svg>

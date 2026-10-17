@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+        <rect width="64" height="64" rx="8" fill="#1f0a0e" stroke="#c41e3a" stroke-width="2"/>
+        <g fill="#c41e3a">
+            <!-- Runeblade Skull -->
+            <path d="M24 20 C24 14 40 14 40 20 C42 24 42 30 38 34 L38 42 L26 42 L26 34 C22 30 22 24 24 20 Z" fill="#c41e3a"/>
+            <!-- Glowing Ice Rune Eyes -->
+            <circle cx="29" cy="24" r="2.5" fill="#38bdf8"/>
+            <circle cx="35" cy="24" r="2.5" fill="#38bdf8"/>
+            <!-- Blade -->
+            <polygon points="32,42 28,52 32,58 36,52" fill="#71717a" stroke="#c41e3a" stroke-width="1"/>
+            <line x1="32" y1="42" x2="32" y2="54" stroke="#38bdf8" stroke-width="1.5"/>
+            <!-- Horns -->
+            <path d="M25 18 C20 16 16 20 14 26 C17 25 21 24 23 23 Z" fill="#71717a"/>
+            <path d="M39 18 C44 16 48 20 50 26 C47 25 43 24 41 23 Z" fill="#71717a"/>
+        </g>
+    </svg>

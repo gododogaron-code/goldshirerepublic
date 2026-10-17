@@ -1,6 +1,7 @@
 import os
 import json
 import secrets
+import uuid
 from datetime import datetime
 from flask import Flask, render_template, request, jsonify, session
 from flask_sock import Sock
@@ -8,6 +9,7 @@ from database import get_db, hash_password, verify_password, init_db
 
 app = Flask(__name__)
 app.secret_key = secrets.token_hex(32)
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB max file upload
 sock = Sock(app)
 
 # Track active WebSocket connections
@@ -118,6 +120,7 @@ def update_settings():
 import uuid
 
 UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static', 'images', 'avatars', 'uploads')
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp'}
 
 VANILLA_CLASSES = {'warrior', 'paladin', 'hunter', 'rogue', 'priest', 'shaman', 'mage', 'warlock', 'druid'}
@@ -128,13 +131,14 @@ def upload_avatar():
     if 'avatar' not in request.files:
         return jsonify({"error": "Файл аватара не передан"}), 400
     file = request.files['avatar']
-    if file.filename == '':
+    if not file or file.filename == '':
         return jsonify({"error": "Файл не выбран"}), 400
     ext = file.filename.rsplit('.', 1)[-1].lower() if '.' in file.filename else ''
     if ext not in ALLOWED_EXTENSIONS:
         return jsonify({"error": "Поддерживаются форматы: PNG, JPG, JPEG, GIF, WEBP"}), 400
     
-    unique_name = f"avatar_{uuid.uuid4().hex[:12]}.{ext}"
+    os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+    unique_name = f"avatar_{secrets.token_hex(8)}.{ext}"
     dest_path = os.path.join(UPLOAD_FOLDER, unique_name)
     file.save(dest_path)
     avatar_url = f"/static/images/avatars/uploads/{unique_name}"

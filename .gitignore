@@ -1,0 +1,10 @@
+venv/
+__pycache__/
+*.pyc
+tools/
+cloudflared.exe
+mingit.zip
+tunnel_url.txt
+ДЛЯ_ЗАГРУЗКИ_НА_GITHUB/
+wow_goldshire.db
+github_token.txt

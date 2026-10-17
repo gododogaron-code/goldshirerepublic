@@ -11,6 +11,7 @@ function getAvatarSrc(avatar) {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
+    applyCachedUserUI();
     initEmbersCanvas();
     await initTelegramApp();
     await checkAuth();
@@ -177,6 +178,32 @@ async function checkAuth() {
     }
 }
 
+function applyCachedUserUI() {
+    try {
+        const cached = localStorage.getItem('goldshire_user');
+        if (cached) {
+            const user = JSON.parse(cached);
+            const guestNav = document.getElementById('nav-guest-actions');
+            const userNav = document.getElementById('nav-user-actions');
+            const userAvatarImg = document.getElementById('nav-user-avatar');
+            const userNameSpan = document.getElementById('nav-user-name');
+            const adminBtn = document.getElementById('nav-admin-btn');
+            if (guestNav) guestNav.style.display = 'none';
+            if (userNav) userNav.style.display = 'flex';
+            if (userNameSpan && user.character_name) {
+                userNameSpan.textContent = user.character_name;
+                userNameSpan.className = `class-color-${user.wow_class || 'warrior'}`;
+            }
+            if (userAvatarImg && user.avatar) {
+                userAvatarImg.src = getAvatarSrc(user.avatar);
+            }
+            if (adminBtn) {
+                adminBtn.style.display = user.is_admin ? 'inline-flex' : 'none';
+            }
+        }
+    } catch(e) {}
+}
+
 function updateUserUI() {
     const guestNav = document.getElementById('nav-guest-actions');
     const userNav = document.getElementById('nav-user-actions');
@@ -185,6 +212,15 @@ function updateUserUI() {
     const adminBtn = document.getElementById('nav-admin-btn');
 
     if (window.currentUser) {
+        try {
+            localStorage.setItem('goldshire_user', JSON.stringify({
+                character_name: window.currentUser.character_name,
+                wow_class: window.currentUser.wow_class,
+                avatar: window.currentUser.avatar,
+                is_admin: window.currentUser.is_admin
+            }));
+        } catch(e) {}
+
         if (guestNav) guestNav.style.display = 'none';
         if (userNav) userNav.style.display = 'flex';
         if (userNameSpan) {
@@ -198,6 +234,10 @@ function updateUserUI() {
             adminBtn.style.display = window.currentUser.is_admin ? 'inline-flex' : 'none';
         }
     } else {
+        try {
+            localStorage.removeItem('goldshire_user');
+        } catch(e) {}
+
         if (guestNav) guestNav.style.display = 'flex';
         if (userNav) userNav.style.display = 'none';
         if (adminBtn) adminBtn.style.display = 'none';
@@ -537,8 +577,8 @@ function setupAvatarUploaders() {
                         method: 'POST',
                         body: formData
                     });
-                    const data = await res.json();
-                    if (data.success && data.avatar_url) {
+                    const data = await res.json().catch(() => ({}));
+                    if (res.ok && data.success && data.avatar_url) {
                         valInput.value = data.avatar_url;
                         if (preview) preview.src = data.avatar_url;
                         if (urlInput) urlInput.value = '';
@@ -548,10 +588,12 @@ function setupAvatarUploaders() {
                         if (window.tavernAudio) window.tavernAudio.playClick();
                     } else {
                         if (statusText) statusText.textContent = '';
-                        alert(data.error || 'Ошибка загрузки аватара');
+                        alert(data.error || `Ошибка загрузки аватара (код ${res.status})`);
                     }
                 } catch(err) {
-                    alert('Ошибка связи с сервером при загрузке');
+                    const statusText = document.getElementById(`${prefix}-avatar-status`);
+                    if (statusText) statusText.textContent = '';
+                    alert('Ошибка связи с сервером при загрузке: ' + (err.message || err));
                 }
             });
         }

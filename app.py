@@ -289,6 +289,73 @@ def telegram_auth():
 
     return jsonify({"success": True, "user": current_u, "is_new": True})
 
+BOT_TOKEN = "8931995816:AAEY6YuEGAR_vvPlIQSwlW6S2JMF2Aisjn4"
+
+def send_telegram_bot_message(chat_id, text, web_app_url="https://goldshire-republic.onrender.com"):
+    import urllib.request
+    api_url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
+    payload = {
+        "chat_id": chat_id,
+        "text": text,
+        "parse_mode": "Markdown",
+        "reply_markup": {
+            "inline_keyboard": [
+                [
+                    {
+                        "text": "⚔️ Войти в Златоземье",
+                        "web_app": {"url": web_app_url}
+                    }
+                ]
+            ]
+        }
+    }
+    try:
+        req = urllib.request.Request(
+            api_url,
+            data=json.dumps(payload).encode('utf-8'),
+            headers={'Content-Type': 'application/json'}
+        )
+        urllib.request.urlopen(req, timeout=5)
+    except Exception as e:
+        print("Telegram send error:", e)
+
+    # Set user menu button
+    try:
+        btn_url = f"https://api.telegram.org/bot{BOT_TOKEN}/setChatMenuButton"
+        btn_payload = {
+            "chat_id": chat_id,
+            "menu_button": {
+                "type": "web_app",
+                "text": "⚔️ Златоземье",
+                "web_app": {"url": web_app_url}
+            }
+        }
+        b_req = urllib.request.Request(
+            btn_url,
+            data=json.dumps(btn_payload).encode('utf-8'),
+            headers={'Content-Type': 'application/json'}
+        )
+        urllib.request.urlopen(b_req, timeout=5)
+    except Exception:
+        pass
+
+@app.route('/api/tg_webhook', methods=['POST'])
+def tg_webhook():
+    update = request.json or {}
+    message = update.get('message')
+    if message:
+        chat_id = message.get('chat', {}).get('id')
+        if chat_id:
+            welcome = (
+                "🏰 *Добро пожаловать в Златоземье!*\n\n"
+                "Гильдия: *the goldshire republick*\n"
+                "Сервер: *WoW Forever 1.0 (Vanilla) х1*\n"
+                "Открытие: *4 ноября в 15:00 МСК*\n\n"
+                "Нажмите кнопку ниже, чтобы открыть приложение:"
+            )
+            send_telegram_bot_message(chat_id, welcome)
+    return jsonify({"ok": True})
+
 @app.route('/api/logout', methods=['POST'])
 def logout():
     session.pop('user_id', None)
